@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="NFQ-Android-Test-Suite" parallel="tests" thread-count="2">
+
+    <!--SonyXperia_Settings-->
+    <!--  <test name="Test-Sony-Xperia">-->
+    <!--        <parameter name="deviceName" value="Galaxy Nexus API 27" />-->
+    <!--        <parameter name="platformVersion" value="8.1" />-->
+    <!--        <classes>-->
+    <!--            <class name="tests.candidate.tests.ApplyToJob" />-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <test name="Android Emulator">
+        <parameter name="deviceName" value="Android Emulator"/>
+        <parameter name="platformVersion" value="7.0" />
+        <classes>
+            <!--            <class name="tests.cucumber.android.tests.LoginTest" />-->
+            <class name="tests.cucumber.android.tests.OperationTest" />
+            <!--            <class name="tests.cucumber.android.tests.OperationDetailTest" />-->
+        </classes>
+    </test>
+
+</suite>
