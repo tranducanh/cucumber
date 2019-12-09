@@ -8,6 +8,7 @@ Feature: Bar for operation
     And I click on Login button
     Then I see the next login screen
     And I fill "Test12345678!" as password for the next login
+    And I select "Anh" workstation
     And I click on Login button of the next login
 
 
@@ -15,10 +16,15 @@ Feature: Bar for operation
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
-    And I navigated to "Drinks" main group and "Soft" sub-group
+      | ^Bar[0-9]([a-z]{6}) |
+    And I navigated to "Drinks" main group and "Sub 2" sub-group
     And I book articles with the following data:
-      | Main Food      | Secondary Food | Price | Secondary Price | Is Deposit |
-      | Deposit main 2 | vo chai        | 5,70  | 1,00            | ok         |
-      | deposit main 1 | vo chai        | 5,70  | 1,00            | ok         |
+      | Main Food | Secondary Food | Price | Secondary Price | Age restriction |
+      | Arc 1     |                | 1,00  |                 |                 |
+      | Arc 2     |                | 1,00  |                 |                 |
+      | Arc 3     |                | 1,00  |                 |                 |
+    And I click on bar
+    Then  I see a "Bill overview"  bar popup is appeared
+    And I click "Print Invoice" button on bar popup
+    Then I go to operation list screen
 

@@ -51,6 +51,22 @@ public class OrderedArticles {
         return noted;
     }
 
+    private BigDecimal getAmount(Map<String, String> map) {
+        String amount = map.get("Amount");
+        if (StringUtils.isEmpty(amount) || !StringUtils.isAlphanumeric(amount)) {
+            return BigDecimal.ONE;
+        }
+        return BigDecimal.valueOf(Double.parseDouble(amount));
+    }
+
+    private String getMainFoodId(Map<String, String> map) {
+        String Id = map.get("Main Food Id");
+        if (StringUtils.isEmpty(Id) || !StringUtils.isAlphanumeric(Id)) {
+            return StringUtils.EMPTY;
+        }
+        return Id;
+    }
+
     public void removeArticle(String id){
         articles.remove(id);
     }
@@ -73,7 +89,8 @@ public class OrderedArticles {
                         article.name = list.get(i).get("Main Food");
                         article.price = Utils.ConvertToBigDecimal(list.get(i).get("Price"));
                         article.stringPrice = list.get(i).get("Price");
-                        article.quantity = BigDecimal.valueOf(1);
+                        article.quantity = getAmount(list.get(i));
+                        article.articleId = getMainFoodId(list.get(i));
                     }
                     else {
                         article.name = "";

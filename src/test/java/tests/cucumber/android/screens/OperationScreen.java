@@ -27,12 +27,18 @@ public class OperationScreen extends BaseActions {
     By okButtonOperationPopup = MobileBy.AccessibilityId("btnOK");
     String textOnTabOperationXpath = "//android.view.ViewGroup[@content-desc='*****']";
     String tabOperation = "//android.widget.TextView[@content-desc='lblOperationName*****']";
+    String strOperations = "//android.widget.TextView[contains(@content-desc,'lblOperationName') and contains(@text,'*****')]";
     //More action
     public String moreAction = "(//android.view.ViewGroup[contains(@content-desc,'*****')]/android.view.ViewGroup[2])[1]";
     String moreActionExactlyName = "(//android.view.ViewGroup[contains(@content-desc,'*****')]/android.view.ViewGroup[2])[1]";
     String menuAction = "//android.view.ViewGroup[contains(@content-desc,'btnOperation')]";
     //Menu item
     String menuContext = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup[4]";
+    By btnSearch = By.xpath("//android.view.ViewGroup[@content-desc='btnSearch']");
+    By btnRefresh = By.xpath("//android.view.ViewGroup[@content-desc='btnRefresh']");
+    By txtSearch = By.xpath("//android.widget.EditText[@content-desc='txtSearchMenuItems']");
+    By progressBar = By.xpath("//android.widget.ProgressBar");
+    public String operationNameStr = "";
 
 
     public OperationScreen(AppiumDriver driver) {
@@ -47,24 +53,29 @@ public class OperationScreen extends BaseActions {
         Assert.assertTrue(isElementPresent(btnAddOperation));
     }
 
+    public void clickOnSearch() {
+        waitAndClick(btnSearch);
+    }
+
+    public void clickOnRefresh() {
+        waitAndClick(btnRefresh);
+    }
+
+    public void fillSearch(String operationName) {
+        WebElement el = waitAndFindElement(txtSearch);
+        sendText(el, operationName);
+        sleep(1000);
+    }
+
+
     public void clickPlusButton() {
         int i =0;
         while (i<5 && !isElementPresent(okButtonOperationPopup)) {
-            MobileElement el = (MobileElement) waitAndFindElement(btnAddOperation);
-            tapByElement(el);
+            sleep(1000);
             i++;
         }
-    }
-
-    public void fillOperationName(String arg0) {
-        int i = 0;
-        boolean isFound = isElementPresent(operationName);
-        while (i < 5 && !isFound) {
-            isFound = isElementPresent(operationName);
-            i++;
-        }
-        if (isFound)
-          sendText(operationName,arg0);
+        MobileElement el = (MobileElement) waitAndFindElement(btnAddOperation);
+        tapByElement(el);
     }
 
     public void clickOkButtonOfPopup() {
@@ -114,6 +125,11 @@ public class OperationScreen extends BaseActions {
         Assert.assertEquals(isShow,false);
     }
 
+    public void verifyThatNumberOfOperationIsEqual(String searchKey, int num) {
+        List<WebElement> els = waitAndFindElements(By.xpath(strOperations.replace(REPLACE_STRING, searchKey)));
+        Assert.assertEquals(els.size(), num);
+    }
+
     public void getPriceOnTab(String arg0) {
         By el = By.xpath("//android.widget.TextView[@content-desc='lblOperationPrice"+arg0+"']");
         totalPrice = waitAndFindElement(el).getText();
@@ -133,10 +149,9 @@ public class OperationScreen extends BaseActions {
                 return;
             }
         }
-
     }
 
-    public void clickOnMenuItemByExactlyName(String nameOperation,String nameMenu){
+    public void clickOnMenuItemByExactlyName(String nameOperation, String nameMenu) {
         int i =0;
         By by = By.xpath(moreActionExactlyName.replace(REPLACE_STRING,nameOperation));
         while (i<10 && this.isElementPresent(by) ==false){
@@ -151,8 +166,27 @@ public class OperationScreen extends BaseActions {
                 return;
             }
         }
-
     }
 
+    public void fillOperationName(String arg0) {
+        int i = 0;
+        boolean isFound = isElementPresent(operationName);
+        while (i < 5 && !isFound) {
+            isFound = isElementPresent(operationName);
+            i++;
+        }
+        if (isFound)
+            sendText(operationName, arg0);
+    }
 
+    public WebElement getTabOperationByName(String name) {
+        WebElement e = waitAndFindElement(By.xpath(tabOperation.replace(REPLACE_STRING, name)));
+        return e;
+    }
+
+    public void progressBarIsHidden() {
+        while (isElementPresent(progressBar)) {
+
+        }
+    }
 }

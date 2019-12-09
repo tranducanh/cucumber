@@ -15,7 +15,7 @@ Feature: Booking successfully with items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Op[0-9]([a-z]{5}) |
     And I will go to the waiter screen
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Normal" article with price "1,00" €
@@ -26,7 +26,7 @@ Feature: Booking successfully with items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Op[0-9]([a-z]{5}) |
     And I will go to the waiter screen
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Age Portion" article with price "2,00" €
@@ -39,7 +39,7 @@ Feature: Booking successfully with items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Op[0-9]([a-z]{5}) |
     And I will go to the waiter screen
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
@@ -57,7 +57,7 @@ Feature: Booking successfully with items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Op[0-9]([a-z]{5}) |
     And I will go to the waiter screen
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Price  Add. Text" article with price "0,00" €
@@ -72,7 +72,7 @@ Feature: Booking successfully with items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Op[0-9]([a-z]{5}) |
     And I will go to the waiter screen
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Forced add. article" article with price "4,00" €
@@ -95,7 +95,7 @@ Feature: Booking successfully with items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Op[0-9]([a-z]{5}) |
     And I will go to the waiter screen
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "No-Forced add. article" article with price "5,00" €
@@ -107,7 +107,7 @@ Feature: Booking successfully with items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Op[0-9]([a-z]{5}) |
     And I will go to the waiter screen
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Age Portion" article with price "2,00" €

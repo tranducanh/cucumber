@@ -8,6 +8,7 @@ public class Article {
     public String name;
     public BigDecimal quantity;
     public String id;
+    public String articleId;
     public BigDecimal price;
     public boolean isAdditional = false;
     public TypeChoose ageRestriction = TypeChoose.EMPTY;

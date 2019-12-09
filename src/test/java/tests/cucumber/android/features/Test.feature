@@ -12,8 +12,13 @@ Feature: test for operation
 
   Scenario: test
     Given I see the operation screen
-    When I create new a operation with the following data:
-      | Name              |
-      | ^[0-9]([a-z]{20}) |
-    And I navigated to "Drinks" main group and "Soft" sub-group
-    And I click on menu at 1 with "Operation discount (%)"
+#    When I create new a operation with the following data:
+#      | Name              |
+#      | ^[0-9]([a-z]{20}) |
+#    Then I will go to the waiter screen
+#    And I navigated to "Drinks" main group and "Soft" sub-group
+    And I close out report
+    And I choose manual report
+    And I choose invoice cancellation
+    Then  I see a "Invoice cancellation"  bar popup is appeared
+    And I click the first receipt

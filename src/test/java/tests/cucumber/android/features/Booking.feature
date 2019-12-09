@@ -14,7 +14,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food         | Secondary Food | Price | Secondary Price | Age restriction |
@@ -38,7 +38,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food   | Secondary Food | Price | Secondary Price | Age restriction |
@@ -49,26 +49,26 @@ Feature: Booking successfully with multiple cases
     Then The sum of added articles is equal total label
 
    # Test with small and large portion
-  Scenario: Again with small and large and disable
-    Given I see the operation screen
-    When I create new a operation with the following data:
-      | Name              |
-      | ^[0-9]([a-z]{20}) |
-    And I navigated to "Food" main group and "Rice" sub-group
-    And I book articles with the following data:
-      | Main Food       | Price | Secondary Food | Secondary Price |
-      | Article portion | 3,51  | Dau khuong     | 0,40            |
-      | Article portion | 3,51  | Dau do         | 1,30            |
-    #Disable = Name is empty
-    And I book a portion is disabled
-    And I click Ok button
-    Then The disabled portion is not added
+#  Scenario: Again with small and large and disable
+#    Given I see the operation screen
+#    When I create new a operation with the following data:
+#      | Name              |
+#      | ^[0-9]([a-z]{20}) |
+#    And I navigated to "Food" main group and "Rice" sub-group
+#    And I book articles with the following data:
+#      | Main Food       | Price | Secondary Food | Secondary Price |
+#      | Article portion | 3,51  | Dau khuong     | 0,40            |
+#      | Article portion | 3,51  | Dau do         | 1,30            |
+#    #Disable = Name is empty
+#    And I book a portion is disabled
+#    And I click Ok button
+#    Then The disabled portion is not added
 
   Scenario: Check Cancel-Button of Age check
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food   | Secondary Food | Price | Secondary Price | Age restriction |
@@ -81,7 +81,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food   | Secondary Food | Price | Secondary Price | Age restriction |
@@ -92,7 +92,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -103,7 +103,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -115,7 +115,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -126,7 +126,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -138,7 +138,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -150,7 +150,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -168,7 +168,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -192,7 +192,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -212,7 +212,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -229,7 +229,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Weight F2 Add. Text" article with price "3,00" €
     Then A pop-up to fill weight of article appear with info "(3 € / 100gram)"
@@ -245,7 +245,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Price  Add. Text" article with price "0,00" €
     Then a pop-up to fill price of an article
@@ -282,7 +282,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I click on "Price  Add. Text" article with price "0,00" €
     Then a pop-up to fill price of an article
@@ -299,7 +299,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food           | Price | Secondary Food | Secondary Price | Noted  |
@@ -314,7 +314,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food           | Price | Secondary Food | Secondary Price | Noted  |
@@ -339,7 +339,7 @@ Feature: Booking successfully with multiple cases
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Book[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food           | Price | Secondary Food | Secondary Price | Noted  |

@@ -129,6 +129,7 @@ public class OperationSteps extends BaseSteps {
 
     @And("^I go to operation list screen$")
     public void iGoToOperationListScreen() {
+        operationScreen.isDisplayed();
     }
 
     @Then("^Alert error message show \"([^\"]*)\"This operation is currently opened by user: \"([^\"]*)\"$")
@@ -143,6 +144,7 @@ public class OperationSteps extends BaseSteps {
         operation = new Operation(list.get(0).get("Name"));
         operationScreen.clickPlusButton();
         operationScreen.fillOperationName(operation.name);
+        operationScreen.operationNameStr = operation.name;
         operationScreen.clickOkButtonOfPopup();
         operationDetailScreen.isDisplayed();
     }
@@ -195,5 +197,16 @@ public class OperationSteps extends BaseSteps {
         }
 
 
+    }
+
+    @And("^I search with keyword \"([^\"]*)\"$")
+    public void iSearchWithKeyword(String keyword) throws Throwable {
+        operationScreen.clickOnSearch();
+        operationScreen.fillSearch(keyword);
+    }
+
+    @Then("^The operation with keyword \"([^\"]*)\" is (\\d+)$")
+    public void theOperationWithKeywordIs(String keyword, int numberOfOperation) throws Throwable {
+        operationScreen.verifyThatNumberOfOperationIsEqual(keyword, numberOfOperation);
     }
 }

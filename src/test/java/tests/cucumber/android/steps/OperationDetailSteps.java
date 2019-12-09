@@ -2,11 +2,13 @@ package tests.cucumber.android.steps;
 
 import base.AndroidThreadLocalDriver;
 import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import tests.cucumber.android.screens.LoginScreen;
 import tests.cucumber.android.screens.NextLoginScreen;
@@ -44,7 +46,7 @@ public class OperationDetailSteps extends BaseSteps {
     @When("^I navigated to \"([^\"]*)\" main group and \"([^\"]*)\" sub-group$")
     public void iNavigatedToMainGroupAndSubGroup(String main, String sub) throws Throwable {
 
-       operationDetailScreen.chooseMainFoodWithName(main);
+        operationDetailScreen.clickMainMenu(main);
        operationDetailScreen.clickOnSubFood(sub);
     }
 
@@ -183,7 +185,7 @@ public class OperationDetailSteps extends BaseSteps {
     @And("^I click on \"([^\"]*)\" article with price \"([^\"]*)\" € with (\\d+) times$")
     public void iClickOnArticleWithPrice€WithTimes(String arg0, String arg1, int arg2) throws Throwable {
         for (int i=0;i<arg2;i++){
-            operationDetailScreen.clickOnArticleWithPrice(arg0,arg1);
+            operationDetailScreen.clickOnArticleWithNameAndPrice(arg0, arg1);
         }
     }
 
@@ -199,8 +201,10 @@ public class OperationDetailSteps extends BaseSteps {
         orderedArticles.data  = data;
         List<Article> articles = orderedArticles.mapDataFromDataTable();
         for (Article a :articles) {
-            if (StringUtils.isNotEmpty(a.name)) {
+            if (StringUtils.isNotEmpty(a.name) && StringUtils.isEmpty(a.articleId)) {
                 operationDetailScreen.clickOnArticleWithNameAndPrice(a.name, a.stringPrice);
+            } else if (StringUtils.isNotEmpty(a.name) && !StringUtils.isEmpty(a.articleId)) {
+                operationDetailScreen.chooseArticleFromNumpad(a.articleId, a.quantity);
             }
             if (a.ageRestriction == TypeChoose.CANCEL){
                 continue;
@@ -233,7 +237,7 @@ public class OperationDetailSteps extends BaseSteps {
 
     @And("^I book a portion is disabled$")
     public void iBookAPortionIsDisabled() {
-        operationDetailScreen.clickOnArticleWithPrice("Article portion","");
+        operationDetailScreen.clickOnArticleWithNameAndPrice("Article portion", "");
         operationDetailScreen.clickOnPortion("Large");
     }
 
@@ -317,7 +321,7 @@ public class OperationDetailSteps extends BaseSteps {
 
     @Then("^A new selected booking appears on top booking list with name \"([^\"]*)\" with \"([^\"]*)\" price with only add text$")
     public void aNewSelectedBookingAppearsOnTopBookingListWithNameWithPriceWithOnlyAddText(String arg0, String arg1) throws Throwable {
-        operationDetailScreen.verifyThatAdditionArticleJustAddedOnlyAdditionalText(arg0);
+        operationDetailScreen.verifyThatAdditionArticleJustAddedOnlyWithAdditionalText(arg0);
 
     }
 
@@ -384,8 +388,8 @@ public class OperationDetailSteps extends BaseSteps {
     }
 
     @And("^I click on menu at (\\d+) with \"([^\"]*)\"$")
-    public void iClickOnMenuAtWith(int arg0, String arg1) throws Throwable {
-        operationDetailScreen.clickOnMenuHeaderWithName(arg0,arg1);
+    public void iClickOnMenuAtWith(int index, String text) throws Throwable {
+        operationDetailScreen.clickOnMenuHeaderWithName(index, text);
     }
 
     @And("^I discount all \"([^\"]*)\"$")
@@ -436,7 +440,7 @@ public class OperationDetailSteps extends BaseSteps {
 
     @Then("^I see a split board$")
     public void iSeeASplitBoard() {
-        operationDetailScreen.verifyThatASplitBoard();
+        operationDetailScreen.verifyThatASplitBoardIsExisted();
     }
 
     @Then("^I see that split board contains (\\d+) items$")
@@ -457,5 +461,117 @@ public class OperationDetailSteps extends BaseSteps {
     @Then("^The balance on split board will be \"([^\"]*)\"$")
     public void theBalanceOnSplitBoardWillBe(String total) throws Throwable {
         operationDetailScreen.verifyThatBalanceOnLabelIsEqual(operationDetailScreen.balanceOfSplit,total);
+    }
+
+    @And("^I click on bar$")
+    public void iClickOnBar() {
+        operationDetailScreen.clickOnBar();
+    }
+
+    @And("^I book articles \"([^\"]*)\" (\\d+) times$")
+    public void iBookArticlesTimes(String name, int times) throws Throwable {
+        operationDetailScreen.bookingNTimes(name, times);
+    }
+
+    @Then("^operation will increase (\\d+) times$")
+    public void operationWillIncreaseTimes(int times) {
+        operationDetailScreen.verifyThatIncreaseNTimes(times);
+    }
+
+    @And("^I fill the tip (\\d+) \"([^\"]*)\"$")
+    public void iFillTheTip(int tip, String arg1) throws Throwable {
+        operationDetailScreen.setTip(tip + "");
+    }
+
+    @And("^I create a voucher with (\\d+) \"([^\"]*)\"$")
+    public void iCreateAVoucherWith(int price, String code) throws Throwable {
+        operationDetailScreen.setPriceVoucher("" + price, code);
+    }
+
+    @And("^I create a redeem voucher \"([^\"]*)\"$")
+    public void iCreateARedeemVoucher(String code) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        operationDetailScreen.setRedeemVoucher(code);
+    }
+
+    @And("^I create a guest expense \"([^\"]*)\" with the reason \"([^\"]*)\"$")
+    public void iCreateAGuestExpenseWithTheReason(String amount, String reason) throws Throwable {
+        operationDetailScreen.setGuestExpense(amount, reason);
+    }
+
+    @And("^I close out report$")
+    public void iCloseOutReport() {
+        operationDetailScreen.chooseCloseOutReport();
+    }
+
+    @And("^I choose manual report$")
+    public void iChooseManualReport() {
+        operationDetailScreen.chooseManualReport();
+    }
+
+    @And("^I choose invoice cancellation$")
+    public void iChooseInvoiceCancellation() {
+        operationDetailScreen.chooseInvoiceCancellation();
+    }
+
+    @And("^I click the first receipt$")
+    public void iClickTheFirstReceipt() {
+        operationDetailScreen.chooseReceiptToCancel();
+    }
+
+    @And("^I set the working date$")
+    public void iSetTheWorkingDate() {
+        operationDetailScreen.setWorkingDate();
+    }
+
+    @Then("^The working date increase (\\d+) date$")
+    public void theWorkingDateIncreaseDate(int arg0) {
+        operationDetailScreen.theWorkingDateIncreaseDate();
+    }
+
+    @Then("^I see report appeared$")
+    public void iSeeReportAppeared() {
+
+    }
+
+    @And("^I choose invoice copying$")
+    public void iChooseInvoiceCopying() {
+        operationDetailScreen.chooseInvoiceCopy();
+    }
+
+    @Then("^I see the copied operation  appeared$")
+    public void iSeeTheCopiedOperationAppeared() {
+        operationDetailScreen.verifyThatTheOperationCopied("_Copy");
+    }
+
+    @And("^I select \"([^\"]*)\" printer$")
+    public void iSelectPrinter(String printer) throws Throwable {
+        operationDetailScreen.selectPrinter(printer);
+    }
+
+    @Then("^The name split will be \"([^\"]*)\"$")
+    public void theNameSplitWillBe(String nameOperation) throws Throwable {
+        operationDetailScreen.verifyThatTheSplitNameIsOrdered(nameOperation);
+    }
+
+    @And("^I click on receipt of split$")
+    public void iClickOnReceiptOfSplit() {
+        operationDetailScreen.clickOnReceiptSplit();
+    }
+
+    @And("^I wait progress bar is hidden$")
+    public void iWaitProgressBarIsHidden() {
+        operationScreen.progressBarIsHidden();
+
+    }
+
+    @And("^I create a voucher \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void iCreateAVoucherWith(String code, String price) throws Throwable {
+        operationDetailScreen.setPriceVoucher(price, code);
+    }
+
+    @And("^I redeem a voucher \"([^\"]*)\"$")
+    public void iRedeemAVoucher(String code) throws Throwable {
+        operationDetailScreen.setRedeemVoucher(code);
     }
 }

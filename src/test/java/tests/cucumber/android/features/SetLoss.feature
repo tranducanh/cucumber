@@ -14,7 +14,7 @@ Feature: Set Loss for items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^setloss[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food         | Secondary Food | Price | Secondary Price | Age restriction |
@@ -29,7 +29,7 @@ Feature: Set Loss for items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^setloss[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
       | Main Food           | Price | Secondary Food | Secondary Price | Noted  |

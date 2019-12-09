@@ -13,14 +13,14 @@ Feature: Voucher for items
   Scenario: Set voucher for item at index 1
     Given I see the operation screen
     When I create new a operation with the following data:
-      | Name              |
-      | ^Test[0-9]([a-z]{20}) |
+      | Name                  |
+      | ^Vcher[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
-      | Main Food         | Secondary Food | Price | Secondary Price | Age restriction |
-      | Age Portion       | Normal         | 2,00  | 3,00            | ok              |
-      | Age Portion       | Large         | 2,00  | 4,00            | ok              |
-      | Age Portion       | Small         | 2,00  | 2,00            | ok              |
+      | Main Food   | Secondary Food | Price | Secondary Price | Age restriction |
+      | Age Portion | Normal         | 2,00  | 3,00            | ok              |
+      | Age Portion | Large          | 2,00  | 4,00            | ok              |
+      | Age Portion | Small          | 2,00  | 2,00            | ok              |
     And I click item at index 1 in ordered items
     And I click on set voucher
     Then  I see a "Vouchers"  bar popup is appeared
@@ -31,14 +31,14 @@ Feature: Voucher for items
   Scenario: Set vouchers for all items
     Given I see the operation screen
     When I create new a operation with the following data:
-      | Name              |
-      | ^Test[0-9]([a-z]{20}) |
+      | Name                  |
+      | ^Vcher[0-9]([a-z]{5}) |
     And I navigated to "Drinks" main group and "Soft" sub-group
     And I book articles with the following data:
-      | Main Food         | Secondary Food | Price | Secondary Price | Age restriction |
-      | Age Portion       | Normal         | 2,00  | 3,00            | ok              |
-      | Age Portion       | Large         | 2,00  | 4,00            | ok              |
-      | Age Portion       | Small         | 2,00  | 2,00            | ok              |
+      | Main Food   | Secondary Food | Price | Secondary Price | Age restriction |
+      | Age Portion | Normal         | 2,00  | 3,00            | ok              |
+      | Age Portion | Large          | 2,00  | 4,00            | ok              |
+      | Age Portion | Small          | 2,00  | 2,00            | ok              |
     And I click item at index 1 in ordered items
     And I click on set voucher
     Then  I see a "Vouchers"  bar popup is appeared

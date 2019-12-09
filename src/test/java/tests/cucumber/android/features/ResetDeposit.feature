@@ -9,13 +9,13 @@ Feature: Reset deposit
     Then I see the next login screen
     And I fill "Test12345678!" as password for the next login
     And I click on Login button of the next login
-#    And I clear all operation with start "^"
+    And I clear all operation with start "^"
 
   Scenario: Reset Deposit for multi operation
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name              |
-      | ^[0-9]([a-z]{20}) |
+      | ^Reset[0-9]([a-z]{5}) |
     And I navigated to "Food" main group and "Rice" sub-group
     And I book articles with the following data:
       | Main Food      | Secondary Food | Price | Secondary Price | Is Deposit |

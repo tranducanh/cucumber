@@ -10,14 +10,14 @@ import org.testng.annotations.Test;
 
 @CucumberOptions(
         monochrome = true,
-        tags = "@OperationDetail,@LoginPostBill",
-        features = "src/test/java/tests/cucumber/android/features/OperationDetail.feature",
+        tags = "@Booking",
+        features = "src/test/java/tests/cucumber/android/features/Booking.feature",
         glue = "tests.cucumber.android.steps" ,
         format = {
                 "pretty",
-                "html:target/cucumber-reports/cucumber-pretty",
-                "json:target/cucumber-reports/CucumberTestReport.json",
-                "rerun:target/cucumber-reports/rerun.txt",
+                "html:target/cucumber-reports1/cucumber-pretty",
+                "json:target/cucumber-reports1/CucumberTestReport.json",
+                "rerun:target/cucumber-reports1/rerun.txt",
         }
 )
 

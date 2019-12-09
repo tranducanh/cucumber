@@ -1,5 +1,5 @@
 @Discount
-Feature: Set Loss for items
+Feature: Set Discount for items
 
   Background:
     Given The UI of Login
@@ -14,7 +14,7 @@ Feature: Set Loss for items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name       |
-      | ^[0-9]([a-z]{20}) |
+      | ^Dis[0-9]([a-z]{5}) |
     And I navigated to "Food" main group and "Rice" sub-group
     And I book articles with the following data:
       | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
@@ -32,7 +32,7 @@ Feature: Set Loss for items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name       |
-      | ^[0-9]([a-z]{20}) |
+      | ^Dis[0-9]([a-z]{5}) |
     And I navigated to "Food" main group and "Rice" sub-group
     And I book articles with the following data:
       | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
@@ -50,7 +50,7 @@ Feature: Set Loss for items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name          |
-      | ^[0-9]([a-z]{20}) |
+      | ^Dis[0-9]([a-z]{5}) |
     And I navigated to "Food" main group and "Rice" sub-group
     And I book articles with the following data:
       | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
@@ -66,7 +66,7 @@ Feature: Set Loss for items
     Given I see the operation screen
     When I create new a operation with the following data:
       | Name      |
-      | ^[0-9]([a-z]{20}) |
+      | ^Dis[0-9]([a-z]{5}) |
     And I navigated to "Food" main group and "Rice" sub-group
     And I book articles with the following data:
       | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
@@ -79,3 +79,85 @@ Feature: Set Loss for items
     And I set price item 2 "67,44"
     Then Item at index 2 is set "67,44 €" value
     Then The sum of prices is "173,99"
+
+  Scenario: Set price for item at index 3 and 4
+    Given I see the operation screen
+    When I create new a operation with the following data:
+      | Name                |
+      | ^Dis[0-9]([a-z]{5}) |
+    And I navigated to "Food" main group and "Rice" sub-group
+    And I book articles with the following data:
+      | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
+      | Discount 45,5% |                | 49    |                 |                 |
+      | Discount 30%   |                | 8     |                 |                 |
+      | Discount 45,5% |                | 49    |                 |                 |
+      | Discount 45,5% |                | 49    |                 |                 |
+    And I set price item 1 "49,55"
+    Then Item at index 1 is set "49,55 €" value
+    And I set price item 2 "67,44"
+    Then Item at index 2 is set "67,44 €" value
+    And  I fill the tip 3 "€"
+    Then The sum of prices is "176,99"
+
+  Scenario: Set price for item at index 3 and 4
+    Given I see the operation screen
+    When I create new a operation with the following data:
+      | Name                |
+      | ^Dis[0-9]([a-z]{5}) |
+    And I navigated to "Food" main group and "Rice" sub-group
+    And I book articles with the following data:
+      | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
+      | Discount 45,5% |                | 49    |                 |                 |
+    And  I fill the tip 3 "€"
+    And I create a guest expense "3" with the reason "buy some cigarete"
+    Then The sum of prices is "55,00"
+
+  Scenario: Create a voucher
+    Given I see the operation screen
+    When I create new a operation with the following data:
+      | Name                |
+      | ^Dis[0-9]([a-z]{5}) |
+    And I navigated to "Food" main group and "Rice" sub-group
+    And I book articles with the following data:
+      | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
+      | Discount 45,5% |                | 49    |                 |                 |
+    And  I fill the tip 3 "€"
+    And I create a voucher with 3 "34C9241E"
+    Then The sum of prices is "55,00"
+
+  Scenario: Redeem a voucher
+    Given I see the operation screen
+    When I create new a operation with the following data:
+      | Name                |
+      | ^Dis[0-9]([a-z]{5}) |
+    And I navigated to "Food" main group and "Rice" sub-group
+    And I book articles with the following data:
+      | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
+      | Discount 45,5% |                | 49    |                 |                 |
+    And  I fill the tip 3 "€"
+    And I create a redeem voucher "34C9241E"
+    Then The sum of prices is "49,00"
+
+  Scenario: Create a voucher 5 euro and buy a food 49 sum will be 52
+    Given I see the operation screen
+    When I create new a operation with the following data:
+      | Name                |
+      | ^Dis[0-9]([a-z]{5}) |
+    And I navigated to "Food" main group and "Rice" sub-group
+    And I book articles with the following data:
+      | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
+      | Discount 45,5% |                | 49    |                 |                 |
+    And I create a voucher "TEST0001" with "5"
+    Then The sum of prices is "54,00"
+
+  Scenario: Redeem a voucher 5 euro and buy a food 49 sum will be 44
+    Given I see the operation screen
+    When I create new a operation with the following data:
+      | Name                |
+      | ^Dis[0-9]([a-z]{5}) |
+    And I navigated to "Food" main group and "Rice" sub-group
+    And I book articles with the following data:
+      | Main Food      | Secondary Food | Price | Secondary Price | Age restriction |
+      | Discount 45,5% |                | 49    |                 |                 |
+    And I redeem a voucher "TEST0001"
+    Then The sum of prices is "44,00"

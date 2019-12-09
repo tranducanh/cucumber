@@ -24,22 +24,6 @@ Feature: User Successful Operation Feature
     And I swipe to find tab that just added with "Test Operation" value
     Then I will go to the waiter screen
 
-  Scenario: Go to Operation detail screen of existing operation using create operation button
-    Given I am in operation list screen
-    When I click on add operation button
-    And I fill "Test Operation" for operation name
-    And I click Ok button
-    Then I am navigated to "Test Operation" Operation screen
-
-  Scenario: Check lock operation
-    Given I am in operation list screen
-    And I swipe to find tab that just added with "Test Operation" value
-    And I Login with other user in other device
-    And I go to operation list screen
-    And I swipe to find tab that just added with "Test Operation" value
-    And I click on tab with "Test Operation" value
-    Then Alert error message show "This operation is currently "This operation is currently opened by user: "employee01"
-
   Scenario: Check cancel button
     Given I am in operation list screen
     When I click on add operation button
@@ -70,9 +54,9 @@ Feature: User Successful Operation Feature
   Scenario: Test what happen when the field is filled with special characters
     Given I am in operation list screen
     When I click on add operation button
-    And I fill "~!111%%%" for operation name
+    And I fill "~!1%%#^1()*@-+=}{[].><?/" for operation name
     And I click Ok button
-    Then I am navigated to "~!111%%%" Operation screen
+    Then I am navigated to "~!1%%#^1()*@-+=}{[].><?/" Operation screen
 
   Scenario: Tear down operation
     Given I am in operation list screen

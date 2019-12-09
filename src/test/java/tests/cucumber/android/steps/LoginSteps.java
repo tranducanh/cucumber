@@ -1,6 +1,7 @@
 package tests.cucumber.android.steps;
 
 import base.AndroidThreadLocalDriver;
+import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -64,15 +65,18 @@ public class LoginSteps extends BaseSteps{
     @And ("^I click on Login button$")
     public void click_login_button() throws IOException {
         loginScreen.clickLogin();
+
     }
 
     @Then ("^I see the next login screen")
     public void isShowNextLogin() {
+
         nextLoginScreen.isDisplayed();
     }
 
     @And("^I fill \"([^\"]*)\" as password for the next login$")
     public void iFillAsPasswordForTheNextLogin(String arg0) throws Throwable {
+
         nextLoginScreen.inputNextPassword(arg0);
     }
 
@@ -134,5 +138,10 @@ public class LoginSteps extends BaseSteps{
     @Then("^I login form$")
     public void iLoginForm() {
         loginScreen.verifyLoginFormShowed();
+    }
+
+    @And("^I select \"([^\"]*)\" workstation$")
+    public void iSelectWorkstation(String nameWorkStation) throws Throwable {
+        nextLoginScreen.selectPrinterNameBy(nameWorkStation);
     }
 }

@@ -16,6 +16,7 @@ public class LoginScreen extends BaseActions {
     By email =     MobileBy.AccessibilityId("txtEmail");
     By password = MobileBy.AccessibilityId("txtPassword");
     By loginButton = MobileBy.AccessibilityId("lblbtnLogin");
+    By okAlert = By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.Button");
     //Invalid Email,Required
     //Password : Too Short! show popup : Login fehlgeschlagen Bitte überprüfen Sie Ihre Login-Daten 40301: Not handle yet
     String wrongEmailMessage = "//android.widget.TextView[contains(@text,'*****')]";
@@ -25,7 +26,16 @@ public class LoginScreen extends BaseActions {
         super(driver);
     }
     public void clickLogin() throws IOException {
-       click(loginButton);
+        click(loginButton);
+        int i = 0;
+        while (i < 5 && !isElementPresent(okAlert)) {
+            i++;
+        }
+        if (isElementPresent(okAlert)) {
+            click(okAlert);
+        }
+
+        //sleep(5000);
     }
 
     public void inputPassword(String arg0) {

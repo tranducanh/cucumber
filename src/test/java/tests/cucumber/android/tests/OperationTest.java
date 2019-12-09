@@ -7,8 +7,8 @@ import org.testng.annotations.*;
 
 @CucumberOptions(
         monochrome = true,
-        tags = "@Booking",
-        features = "src/test/java/tests/cucumber/android/features/",
+        tags = "@Discount",
+        features = "src/test/java/tests/cucumber/android/features",
         glue = "tests.cucumber.android.steps" ,
         format = {
                 "pretty",
